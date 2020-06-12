@@ -11,7 +11,7 @@ int main(int argc, char ** argv)
 {
 	rclcpp::init(argc, argv);
 	auto node = rclcpp::Node::make_shared("send_goal_client");
-	auto action_client = rclcpp_action::create_client<nav2_msgs::action::NavigateToPose>(node, "NavigateToPose");
+	auto action_client = rclcpp_action::create_client<nav2_msgs::action::NavigateToPose>(node, "navigate_to_pose");
 
 	if (!action_client->wait_for_action_server(std::chrono::seconds(20))) {
 		RCLCPP_ERROR(node->get_logger(), "Action server not available after waiting");

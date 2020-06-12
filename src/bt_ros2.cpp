@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
   NodeStatus status = NodeStatus::RUNNING;
   // Keep on ticking until you get either a SUCCESS or FAILURE state
   while (rclcpp::ok() && status == NodeStatus::RUNNING) {
-    status = tree.root_node->executeTick();
+    status = tree.tickRoot();
     // Sleep 100 milliseconds
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
   }
