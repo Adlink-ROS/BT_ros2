@@ -1,6 +1,8 @@
 # BT on ROS2
 
-## Installation
+The packages is a demo of how to use Behavior Tree to control AMR.
+
+# Installation
 ```
 mkdir -p ~/bt_ros2_ws/src
 cd ~/bt_ros2_ws/
@@ -10,9 +12,10 @@ source /opt/ros/dashing/setup.bash
 rosdep install --from-paths src --ignore-src -r -y
 colcon biuld --symlink-install
 ```
-## Usage
+
+# Usage
 ```
 source /opt/ros/dashing/setup.bash
 soruce ~/bt_ros2_ws/install/local_setup.bash
-ros2 run bt_ros2 bt_ros2 _file:=<absolute_path_to_bt_xml>
+ros2 run bt_ros2 bt_ros2 _bt_xml:=<absolute_path_to_bt_xml>
 ```
