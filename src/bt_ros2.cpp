@@ -2,6 +2,8 @@
 #include <behaviortree_cpp_v3/bt_factory.h>
 #include <behaviortree_cpp_v3/loggers/bt_cout_logger.h>
 
+#define DEFAULT_BT_XML "/home/ros/bt_ros2_ws/src/BT_ros2/bt_xml/bt_nav_mememan.xml"
+
 using namespace BT;
 
 int main(int argc, char **argv) {
@@ -10,7 +12,7 @@ int main(int argc, char **argv) {
   rclcpp::init(argc, argv);
 
   auto nh = rclcpp::Node::make_shared("neuronbt");
-  nh->declare_parameter("bt_xml", rclcpp::ParameterValue(std::string("/home/iven/iven_ws/neuronbot2_ws/src/neuronbot2/neuronbt/config/neuronbt.xml")));
+  nh->declare_parameter("bt_xml", rclcpp::ParameterValue(std::string(DEFAULT_BT_XML)));
   std::string bt_xml;
   nh->get_parameter("bt_xml", bt_xml);
   RCLCPP_INFO(nh->get_logger(), "Loading XML : %s", bt_xml.c_str());
