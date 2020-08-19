@@ -46,7 +46,6 @@ Pose2D convertFromString(StringView key)
 }
 } // end namespace BT
 
-
 class Nav2Client : public BT::AsyncActionNode
 {
 public:
@@ -63,89 +62,88 @@ public:
     virtual BT::NodeStatus tick() override
     {
         node_ = rclcpp::Node::make_shared("nav2_client");
-	    auto action_client = rclcpp_action::create_client<nav2_msgs::action::NavigateToPose>(node_, "navigate_to_pose");
+        auto action_client = rclcpp_action::create_client<nav2_msgs::action::NavigateToPose>(node_, "navigate_to_pose");
         // if no server is present, fail after 5 seconds
         if (!action_client->wait_for_action_server(std::chrono::seconds(20))) {
-        		// RCLCPP_ERROR(node_->get_logger(), "Action server not available after waiting");
-        		return BT::NodeStatus::FAILURE;
+            // RCLCPP_ERROR(node_->get_logger(), "Action server not available after waiting");
+            return BT::NodeStatus::FAILURE;
         }
         // Take the goal from the InputPort of the Node
         Pose2D goal;
         if (!getInput<Pose2D>("goal", goal)) {
-          // if I can't get this, there is something wrong with your BT.
-          // For this reason throw an exception instead of returning FAILURE
-          throw BT::RuntimeError("missing required input [goal]");
+            // if I can't get this, there is something wrong with your BT.
+            // For this reason throw an exception instead of returning FAILURE
+            throw BT::RuntimeError("missing required input [goal]");
         }
 
         _aborted = false;
         printf("%.2f, %.2f, %.2f", goal.x, goal.y, goal.theta);
         RCLCPP_INFO(node_->get_logger(), "Sending goal %f %f %f", goal.x, goal.y, goal.theta);
 
-	    nav2_msgs::action::NavigateToPose::Goal goal_msg;
-	    goal_msg.pose.header.frame_id = "map";
+        nav2_msgs::action::NavigateToPose::Goal goal_msg;
+        goal_msg.pose.header.frame_id = "map";
         goal_msg.pose.header.stamp = node_->get_clock()->now();
-	    goal_msg.pose.pose.position.x = goal.x;
-	    goal_msg.pose.pose.position.y = goal.y;
-	    goal_msg.pose.pose.position.z = 0.0;
-            tf2::Quaternion rot;
-            rot.setRPY(0, 0, goal.theta);
-	    rot.normalize();
-	    geometry_msgs::msg::Quaternion quat_msg;
-	    quat_msg = tf2::toMsg(rot);
-	    goal_msg.pose.pose.orientation.x = quat_msg.x;
-	    goal_msg.pose.pose.orientation.y = quat_msg.y;
-	    goal_msg.pose.pose.orientation.z = quat_msg.z;
-	    goal_msg.pose.pose.orientation.w = quat_msg.w;
-        
+        goal_msg.pose.pose.position.x = goal.x;
+        goal_msg.pose.pose.position.y = goal.y;
+        goal_msg.pose.pose.position.z = 0.0;
+        tf2::Quaternion rot;
+        rot.setRPY(0, 0, goal.theta);
+        rot.normalize();
+        geometry_msgs::msg::Quaternion quat_msg;
+        quat_msg = tf2::toMsg(rot);
+        goal_msg.pose.pose.orientation.x = quat_msg.x;
+        goal_msg.pose.pose.orientation.y = quat_msg.y;
+        goal_msg.pose.pose.orientation.z = quat_msg.z;
+        goal_msg.pose.pose.orientation.w = quat_msg.w;
 
-	    auto goal_handle_future = action_client->async_send_goal(goal_msg);
-    	if (rclcpp::spin_until_future_complete(node_, goal_handle_future) !=
-    			rclcpp::executor::FutureReturnCode::SUCCESS)
-    	{
-    		RCLCPP_ERROR(node_->get_logger(), "send goal call failed");
-    		return BT::NodeStatus::FAILURE;
-    	}
-
-	    rclcpp_action::ClientGoalHandle<nav2_msgs::action::NavigateToPose>::SharedPtr goal_handle = goal_handle_future.get();
-	    if (!goal_handle) {
-	    	RCLCPP_ERROR(node_->get_logger(), "Goal was rejected by server");
-    		return BT::NodeStatus::FAILURE;
-	    }
-
-	    auto result_future = action_client->async_get_result(goal_handle);
-
-	    RCLCPP_INFO(node_->get_logger(), "Waiting for result");
-	    if (rclcpp::spin_until_future_complete(node_, result_future) !=
-	    		rclcpp::executor::FutureReturnCode::SUCCESS)
-	    {
-	    	RCLCPP_ERROR(node_->get_logger(), "get result call failed " );
-    		return BT::NodeStatus::FAILURE;
-	    }
-
-	    rclcpp_action::ClientGoalHandle<nav2_msgs::action::NavigateToPose>::WrappedResult wrapped_result = result_future.get();
-
-	    switch (wrapped_result.code) {
-       		case rclcpp_action::ResultCode::SUCCEEDED:
-         			break;
-	    	case rclcpp_action::ResultCode::ABORTED:
-        			RCLCPP_ERROR(node_->get_logger(), "Goal was aborted");
-    		        return BT::NodeStatus::FAILURE;
-       		case rclcpp_action::ResultCode::CANCELED:
-         			RCLCPP_ERROR(node_->get_logger(), "Goal was canceled");
-    		        return BT::NodeStatus::FAILURE;
-       		default:
-         			RCLCPP_ERROR(node_->get_logger(), "Unknown result code");
-    		        return BT::NodeStatus::FAILURE;
-     	}
-
-        if (_aborted) {
-          // this happens only if method halt() was invoked
-          //_client.cancelAllGoals();
-          RCLCPP_INFO(node_->get_logger(), "MoveBase aborted");
-          return BT::NodeStatus::FAILURE;
+        auto goal_handle_future = action_client->async_send_goal(goal_msg);
+        if (rclcpp::spin_until_future_complete(node_, goal_handle_future) !=
+                rclcpp::executor::FutureReturnCode::SUCCESS)
+        {
+            RCLCPP_ERROR(node_->get_logger(), "send goal call failed");
+            return BT::NodeStatus::FAILURE;
         }
 
-	    RCLCPP_INFO(node_->get_logger(), "result received");
+        rclcpp_action::ClientGoalHandle<nav2_msgs::action::NavigateToPose>::SharedPtr goal_handle = goal_handle_future.get();
+        if (!goal_handle) {
+            RCLCPP_ERROR(node_->get_logger(), "Goal was rejected by server");
+            return BT::NodeStatus::FAILURE;
+        }
+
+        auto result_future = action_client->async_get_result(goal_handle);
+
+        RCLCPP_INFO(node_->get_logger(), "Waiting for result");
+        if (rclcpp::spin_until_future_complete(node_, result_future) !=
+                rclcpp::executor::FutureReturnCode::SUCCESS)
+        {
+            RCLCPP_ERROR(node_->get_logger(), "get result call failed " );
+            return BT::NodeStatus::FAILURE;
+        }
+
+        rclcpp_action::ClientGoalHandle<nav2_msgs::action::NavigateToPose>::WrappedResult wrapped_result = result_future.get();
+
+        switch (wrapped_result.code) {
+            case rclcpp_action::ResultCode::SUCCEEDED:
+                break;
+            case rclcpp_action::ResultCode::ABORTED:
+                RCLCPP_ERROR(node_->get_logger(), "Goal was aborted");
+                return BT::NodeStatus::FAILURE;
+            case rclcpp_action::ResultCode::CANCELED:
+                RCLCPP_ERROR(node_->get_logger(), "Goal was canceled");
+                return BT::NodeStatus::FAILURE;
+            default:
+                RCLCPP_ERROR(node_->get_logger(), "Unknown result code");
+                return BT::NodeStatus::FAILURE;
+        }
+
+        if (_aborted) {
+            // this happens only if method halt() was invoked
+            //_client.cancelAllGoals();
+            RCLCPP_INFO(node_->get_logger(), "MoveBase aborted");
+            return BT::NodeStatus::FAILURE;
+        }
+
+        RCLCPP_INFO(node_->get_logger(), "result received");
         return BT::NodeStatus::SUCCESS;
     }
 
