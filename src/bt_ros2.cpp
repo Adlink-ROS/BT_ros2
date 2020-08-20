@@ -1,5 +1,5 @@
 #include "nav2_client.hpp"
-#include "interrupt_event.h"
+#include "interrupt_event.hpp"
 #include <behaviortree_cpp_v3/bt_factory.h>
 #include <behaviortree_cpp_v3/loggers/bt_cout_logger.h>
 
