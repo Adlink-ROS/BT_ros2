@@ -17,7 +17,7 @@ rosdep install --from-paths src --ignore-src -r -y
 ```
 3. Build
 ```
-colcon biuld --symlink-install
+colcon build --symlink-install
 ```
 
 # Usage
