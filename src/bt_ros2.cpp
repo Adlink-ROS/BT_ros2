@@ -1,5 +1,6 @@
 #include "nav2_client.hpp"
 #include "interrupt_event.hpp"
+#include "snapshot_client.hpp"
 #include <behaviortree_cpp_v3/bt_factory.h>
 #include <behaviortree_cpp_v3/loggers/bt_cout_logger.h>
 
@@ -23,6 +24,7 @@ int main(int argc, char **argv)
   
     factory.registerNodeType<Nav2Client>("Nav2Client");
     factory.registerNodeType<InterruptEvent>("InterruptEvent");
+    factory.registerNodeType<SnapshotClient>("SnapshotClient");
   
     // Trees are created at deployment-time (i.e. at run-time, but only once at
     // the beginning). The currently supported format is XML. IMPORTANT: when the
