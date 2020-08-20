@@ -47,5 +47,5 @@ ros2 run bt_ros2 bt_ros2 --ros-args -p bt_xml:=$HOME/bt_ros2_ws/src/BT_ros2/bt_x
 ```
 * Open 4th terminal and pub interrupt event.
 ```
-ros2 topic pub /interrupt_event std_msgs/String "gohome"
+ros2 topic pub -1 /interrupt_event std_msgs/msg/String data:\ \'gohome\'
 ```
