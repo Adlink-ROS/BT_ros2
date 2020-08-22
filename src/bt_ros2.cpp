@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
   setvbuf(stdout, NULL, _IONBF, BUFSIZ);
   rclcpp::init(argc, argv);
 
-  auto nh = rclcpp::Node::make_shared("neuronbt");
+  auto nh = rclcpp::Node::make_shared("bt_ros2");
   nh->declare_parameter("bt_xml", rclcpp::ParameterValue(std::string(DEFAULT_BT_XML)));
   std::string bt_xml;
   nh->get_parameter("bt_xml", bt_xml);

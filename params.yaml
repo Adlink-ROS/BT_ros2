@@ -1,0 +1,3 @@
+bt_ros2:
+  ros__parameters:
+    bt_xml: "/home/ros/bt_ros2_ws/src/BT_ros2/bt_xml/bt_nav_mememan_interrupt.xml"

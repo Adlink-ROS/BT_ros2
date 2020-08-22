@@ -46,7 +46,8 @@ ros2 launch neuronbot2_nav neuronbot2_nav.launch.py map:=$HOME/neuronbot2_ros2_w
 ```bash
 source /opt/ros/<ROS2_DISTRO>/local_setup.bash
 source ~/bt_ros2_ws/install/local_setup.bash
-ros2 run bt_ros2 bt_ros2 bt_xml:=$HOME/bt_ros2_ws/src/BT_ros2/bt_xml/bt_nav_mememan_interrupt.xml
+# You can change the path in params.yaml
+ros2 run bt_ros2 bt_ros2 __params:=$HOME/bt_ros2_ws/src/BT_ros2/params.yaml
 ```
 * Open 4th terminal and pub interrupt event.
 ```bash
