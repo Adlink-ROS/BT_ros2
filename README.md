@@ -40,7 +40,7 @@ ros2 launch neuronbot2_gazebo neuronbot2_world.launch.py world_model:=mememan_wo
 ```bash
 source /opt/ros/<ROS2_DISTRO>/local_setup.bash
 source ~/neuronbot2_ros2_ws/install/local_setup.bash
-ros2 launch neuronbot2_nav neuronbot2_nav.launch.py map:=$HOME/neuronbot2_ros2_ws/src/neuronbot2/neuronbot2_nav/map/mememan.yaml open_rviz:=true use_sim_time:=true
+ros2 launch neuronbot2_nav neuronbot2_nav.launch.py map_dir:=$HOME/neuronbot2_ros2_ws/src/neuronbot2/neuronbot2_nav/map/mememan.yaml open_rviz:=true use_sim_time:=true
 ```
 * Open 3rd termainal and run BT.
 ```bash
