@@ -74,3 +74,10 @@ ros2 run image_view image_saver image:=ros2_openvino_toolkit/image_rviz
 source ~/bt_ros2_ws/install/local_setup.bash
 ros2 run bt_ros2 bt_ros2 --ros-args -p bt_xml:=$HOME/bt_ros2_ws/src/BT_ros2/bt_xml/bt_snapshot.xml
 ```
+
+# Note
+If you want to get the coordinate for navigation, you can run navigation2 and listen to the topic /goal_pose.
+
+The position and orientation should be put into BT file, but nav2_client.hpp is using Euler Angle instead of Quaternion.
+
+You can transfer the Quaternion to Euler Angle by using some online tools, such as https://quaternions.online/
