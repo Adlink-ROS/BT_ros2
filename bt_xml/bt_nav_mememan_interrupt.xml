@@ -1,9 +1,9 @@
 <root main_tree_to_execute = "MainTree">
     <BehaviorTree ID="MainTree">
         <Sequence>
-            <SetBlackboard output_key="Goal_a" value="-0.579;-1.341;0.0" />
-            <SetBlackboard output_key="Goal_b" value="5.214;-1.533;0.0" />
-            <SetBlackboard output_key="Goal_c" value="-1.588;1.253;0.0" />
+            <SetBlackboard output_key="Goal_a" value="-0.579;-1.341;0.0;1.0" />
+            <SetBlackboard output_key="Goal_b" value="5.214;-1.533;0.0;1.0" />
+            <SetBlackboard output_key="Goal_c" value="-1.588;1.253;0.0;1.0" />
             <Fallback>
                 <ReactiveSequence>
                     <InterruptEvent event="gohome"/>
