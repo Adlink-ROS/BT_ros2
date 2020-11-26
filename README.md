@@ -80,4 +80,4 @@ If you want to get the coordinate for navigation, you can run navigation2 and li
 
 The position and orientation should be put into BT file and the orientation value we use here is Quaternion.
 
-If you only has Euler Angle and want to transfer to Quaternion, refer to the online tools, such as https://quaternions.online/
+If you only have Euler Angle and want to transfer to Quaternion, please refer to online tools, such as https://quaternions.online/
