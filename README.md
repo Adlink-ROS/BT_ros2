@@ -77,8 +77,14 @@ ros2 run bt_ros2 bt_ros2 --ros-args -p bt_xml:=$HOME/bt_ros2_ws/src/BT_ros2/bt_x
 ```
 
 # Note
-If you want to get the coordinate for navigation, you can run navigation2 and listen to the topic /goal_pose.
+If you want to get the coordinate for navigation, you can run navigation2 and listen to the topic /goal_pose or open rviz2 to monitor tf.
 
 The position and orientation should be put into BT file and the orientation value we use here is Quaternion.
+
+Record X, Y in positoin and Z, W in orientation.
+![](readme_resource/inspect_rviz.png)
+
+Open xml file in bt_xml and modify robot checkpoint with " X ; Y ; Z ; W " format in SetBlackboard.
+![](readme_resource/bt_modify.png)
 
 If you only have Euler Angle and want to transfer to Quaternion, please refer to online tools, such as https://quaternions.online/
