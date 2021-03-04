@@ -1,6 +1,6 @@
 # BT on ROS2
 
-The packages is a demo of how to use Behavior Tree to control AMR.
+BT_ros2 is a demo of how to use Behavior Tree to control AMR.
 All the examples are tested on our NeuronBot simulation. If you are interested in NeuronBot simulation, please go to see the tutorials: https://github.com/Adlink-ROS/neuronbot2#bring-up-in-simulation
 
 # Build
