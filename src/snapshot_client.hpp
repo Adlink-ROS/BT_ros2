@@ -33,7 +33,7 @@ class SnapshotClient : public BT::SyncActionNode
             sleep(3); // To stablize the camera
             auto request = std::make_shared<std_srvs::srv::Empty::Request>();
             auto result_future = client_->async_send_request(request);
-            if (rclcpp::spin_until_future_complete(node_, result_future) != rclcpp::FutureReturnCode::SUCCESS)
+            if (rclcpp::spin_until_future_complete(node_, result_future) != rclcpp::executor::FutureReturnCode::SUCCESS)
             {
                 RCLCPP_ERROR(node_->get_logger(), "Unable to call /save");
                 return BT::NodeStatus::FAILURE;
