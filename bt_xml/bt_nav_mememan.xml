@@ -2,6 +2,7 @@
     <BehaviorTree ID="MainTree">
         <Repeat num_cycles="3">
             <Sequence>
+                <!-- The goal value="position-x;position-y;orientaion-z;orientation-w" -->
                 <SetBlackboard output_key="Goal_a" value="-0.579;-1.341;0.0;1.0" />
                 <SetBlackboard output_key="Goal_b" value="5.214;-1.533;0.0;1.0" />
                 <SetBlackboard output_key="Goal_c" value="-1.588;1.253;0.0;1.0" />
