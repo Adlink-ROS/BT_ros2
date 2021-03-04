@@ -22,7 +22,16 @@ colcon build --symlink-install
 ```
 
 # Usage
-## interrupt
+
+## Basic Example
+
+This example makes NeuronBot2 continuously moving between the pre-defined three goals in ```bt_nav_mememan.xml```.
+
+```bash
+ros2 launch bt_ros2 bt_ros2.launch.py
+```
+
+## Advanced Example - Interrupt
 We use [NeuronBot2](https://github.com/Adlink-ROS/neuronbot2/tree/foxy-devel) as example.
 We will run Gazebo with NeuronBot2 and show a simple BT example.
 
@@ -53,8 +62,8 @@ source /opt/ros/<ROS2_DISTRO>/local_setup.bash
 ros2 topic pub -1 /interrupt_event std_msgs/msg/String data:\ \'gohome\'
 ```
 
-## Take snapshot
-The demo is to show how to take snapshot with BT example.
+## Advanced Example - Take a snapshot
+The demo is to show how to take snapshots with BT example.
 You need to install OpenVINO and its ROS 2 wrapper before using the example.
 
 * Open 1st terminal and run OpenVINO object detection
