@@ -1,6 +1,7 @@
 # BT on ROS2
 
 The packages is a demo of how to use Behavior Tree to control AMR.
+All the examples are tested on our NeuronBot simulation. If you are interested in NeuronBot simulation, please go to see the tutorials: https://github.com/Adlink-ROS/neuronbot2#bring-up-in-simulation
 
 # Build
 1. git clone the repo.
@@ -78,6 +79,6 @@ ros2 run bt_ros2 bt_ros2 --ros-args -p bt_xml:=$HOME/bt_ros2_ws/src/BT_ros2/bt_x
 # Note
 If you want to get the coordinate for navigation, you can run navigation2 and listen to the topic /goal_pose.
 
-The position and orientation should be put into BT file, but nav2_client.hpp is using Euler Angle instead of Quaternion.
+The position and orientation should be put into BT file and the orientation value we use here is Quaternion.
 
-You can transfer the Quaternion to Euler Angle by using some online tools, such as https://quaternions.online/
+If you only have Euler Angle and want to transfer to Quaternion, please refer to online tools, such as https://quaternions.online/
